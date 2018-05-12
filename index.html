@@ -1,0 +1,906 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hashtag Generator</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!--link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/-->
+    <!--JQuery-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
+    <!--Link to Materialize-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <!--script type="text/javascript" src="./materialize/js/materialize.js"></script-->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<style>
+		header {
+			padding: 20px;
+		}
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			/* display: none; <- Crashes Chrome on hover */
+			-webkit-appearance: none;
+			margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+		}
+		
+		div:focus {outline:0;}
+		.collapsible li.disabled .collapsible-body {
+			display: none !important; /*or using id of the app to avoid the use of !important*/
+		}
+		
+		.collapsible li.disabled .collapsible-header {
+			color: rgb(221,221,221);
+		}
+	</style>
+</head>
+
+<body>
+<header></header>
+
+<!-- Collapse -->
+ <div class="container">
+    <ul class="collapsible col s12 m6">
+        <li>
+        	<div class="collapsible-header">
+            	<i class="material-icons">group</i>
+                Teams
+            </div>
+            
+            <div class="collapsible-body">
+            
+                <ul id="c" class="collapsible expandable">
+                    <!--Key Party-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Key Party</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="kp_input" type="text" class="validate" placeholder="In this completely improvised show, the cast will invite an audience member up on stage to share an honest conversation that gives way to scenes!
+">
+                                <label for="kp_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="kpChips1" class="mention chips chips-initial"></div>
+                                    <div id="kpChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--COACH-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>COACH</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="coach_input" type="text" class="validate">
+                                <label for="coach_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="coachChips1" class="mention chips chips-initial"></div>
+                                    <div id="coachChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--Missed Opportunity-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Missed Opportunity</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="mop_input" type="text" class="validate" placeholder="Missed Opportunity is a Bexar Stage house team full of kickass ladies who know first hand that comedy doesn't require a Y-chromosome. Their high-energy scenework will keep you laughing 'til you leave feeling like we're all friends.">
+                                <label for="mop_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="mopChips1" class="mention chips chips-initial"></div>
+                                    <div id="mopChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--Kismet-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Kismet</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="kis_input" type="text" class="validate" placeholder="Kismet uses slow, patient scenework, oozing with almost a decade of on- and off-stage chemistry.">
+                                <label for="kis_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="kisChips1" class="mention chips chips-initial"></div>
+                                    <div id="kisChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--Whine Time-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Whine Time</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="wt_input" type="text" class="validate" placeholder="Morgan and Lisa have a seriously unique friendship that bleeds into scenes made up on the spot based off of your suggestions. Come peer into the mostly dysfunctional and always entertaining dynamic of these besties!">
+                                <label for="wt_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="wtChips1" class="mention chips chips-initial"></div>
+                                    <div id="wtChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--Grumpy Old Men-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Grumpy Old Men</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="gom_input" type="text" class="validate" placeholder="Grumpy Old Men relives the past, proving that passing your prime is only a mistake in a grocery store.">
+                                <label for="gom_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="gomChips1" class="mention chips chips-initial"></div>
+                                    <div id="gomChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--Brongo-->
+                    <li class="disabled">
+                        <div class="collapsible-header">
+                            <div class="switch">
+                                <label>
+                                <input type="checkbox" onChange="toggleActive(this)">
+                                <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div>Brongo</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <i class="material-icons prefix">edit</i>
+                                <input id="bgo_input" type="text" class="validate" placeholder="Brongo plays with a big energy and fantastic stage chemistry. These fellas have been best friends since middle school, so their dynamic will feature the charming wit and whimsy that only best friends could have.">
+                                <label for="bgo_input">Description</label>
+                                <span class="helper-text">Describe the show or something cool</span>
+                                <div class="container">
+                                    <div id="bgoChips1" class="mention chips chips-initial"></div>
+                                    <div id="bgoChips2" class="hashtag chips chips-initial"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <!--div class="btn-floating btn-large waves-effect waves-light teal" onclick="addCollapse()">
+                        <i class="material-icons">add</i>
+                </div-->
+                           
+        </li>
+    </ul>
+</div>
+    
+<!--Sliders-->
+<div class="container">
+    <ul class="collapsible col s12 m6">
+        <li>
+        
+            <div class="collapsible-header">
+            	<i class="material-icons">menu</i>
+                Hashtags
+                <span id="totalBadge" class="badge"></span>
+            </div>
+            
+            <div class="collapsible-body">
+            	<span>Slide the sliders to get a random assortment of Hashtags.</span>
+                <label>Instagram's limit is 30, and we'll always include "@bexarstage", "@improvsa", "#Comedy", "#Improv", and "#BexarStage"</label>
+                
+                <div class="row"></div>
+                <div class="divider"></div>
+                <div class="row"></div>
+                
+                <div class="row">
+                    <div class="col s10 m4">
+                        <form action="#">
+                            <label for="inputSaHash"><span style="color:teal;">San Antonio</span>  (#BestofSA, #KeepSAreal, #do210)</label>
+                            <p class="range-field">
+                                <input id="inputSaHash" type="range" value="0" min="0" onChange="saChng(this)" onMouseMove="saChng(this)">
+                            </p>
+                        </form>
+                   </div>
+                    <div class="input-field col s2 m2">
+                        <input id="saNumDisp" type="number" value="0" onChange="saChng(this)">
+                    </div>
+               </div>
+                      
+                <div class="row">
+                    <div class="col s10 m4">
+                        <form action="#">
+                            <label for="inputComHash"><span style="color:teal;">Comedy</span> (#comedypost, #funnyshit, #localhumor)</label>
+                            <p class="range-field">
+                                <input id="inputComHash" type="range" value="0" min="0" onChange="comChng(this)" onMouseMove="comChng(this)">
+                            </p>
+                        </form>
+                   </div>
+                    <div class="input-field col s2 m2">
+                        <input id="comNumDisp" type="number" value="0" onChange="comChng(this)">
+                    </div>
+               </div>
+               
+                <div class="row">
+                    <div class="col s10 m4">
+                        <form action="#">
+                            <label for="inputPopHash"><span style="color:teal;">Popular</span> (#bestoftheday, #love, #instacool)</label>
+                            <p class="range-field">
+                                <input id="inputPopHash" type="range" value="0" min="0" onChange="popChng(this)" onMouseMove="popChng(this)">
+                            </p>
+                        </form>
+                   </div>
+                    <div class="input-field col s2 m2">
+                        <input id="popNumDisp" type="number" value="0" onChange="popChng(this)">
+                    </div>
+               </div>
+            
+            	<div class="input-field col s2 m2">
+                    
+                </div>
+            </div>
+        </li>
+    </ul>
+<!--Button-->
+
+	<div class="row">
+     	<div class="col s12 m6 center-align">
+			<div class="btn-large waves-effect waves-light" onClick="populateCard()">Generate</div>
+		</div>
+	</div>
+
+	<div class="divider"></div>
+</div>
+
+<!--Card-->
+<div class="container">
+	 <div class="row">
+     	<div class="col s12 m6">
+			
+            <div class="card z-depth-1">
+                <div class="card-content dark-blue-grey-text">
+                    <span class="card-title">Hashtags</span>
+                    <!--p id="cardContent"></p-->
+                    <textarea id="cardContent" class="materialize-textarea"></textarea>
+                    <label for="cardContent">Textarea</label>
+                </div>
+                
+                <div class="card-action">
+                    <!--i class="material-icons">content_copy</i-->
+                    <button class="waves-effect waves-teal btn-flat" onClick="copyText()">Copy</button>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script>
+
+var xHash = ["@bexarstage", "@improvsa", "#Comedy", "#Improv", "#BexarStage"];
+
+var saHash = ["#210","#AlamoCity","#BestofSA","#BYOB","#do210","#igSanAntonio","#igSATX","#igTexas","#ImprovSA","#instaSanAntonio","#KeepSAreal","#lolsa","#SAcurrent","#SanAntonio","#SanAntonioTX","#SATX","#SATXbloggers","#Texas"];
+
+var comHash = ["#actorlife","#comedian","#comedycentral","#comedylife","#comedypost","#comedyshow","#fun","#funny","#funnypost","#funnyshit","#haha","#happy","#hilarious","#humor","#jokes","#laugh","#LiveComedy","#LiveTheatre","#LiveTheater","#lmao","#lmfao","#localcomedy","#localhumor","#lol","#nochill","#savage","#sketchcomedy","#smile"];
+
+var popHash = ["#bestoftheday","#cool","#followback","#igers","#instacool","#instadaily","#instafollow","#instagood","#instagram","#instagramers","#instamood","#instapic","#love","#night","#photo","#photography","#photooftheday","#picoftheday","#red","#vsco","#vscocam","#webstagram"];
+
+//All Slider stuff
+var saSlider = document.getElementById("inputSaHash");
+var comSlider = document.getElementById("inputComHash");
+var popSlider = document.getElementById("inputPopHash");
+
+var saNumDisp = document.getElementById("saNumDisp");
+var comNumDisp = document.getElementById("comNumDisp");
+var popNumDisp = document.getElementById("popNumDisp");
+
+var saHashCount = 0;
+var comHashCount = 0;
+var popHashCount = 0;
+
+var totalHash = 0;
+var tagLimit = 30;
+
+var cardContent = "";
+var cardElem = document.getElementById("cardContent");
+var totBadge = document.getElementById("totalBadge");
+
+saSlider.max = saHash.length;
+comSlider.max = comHash.length;
+popSlider.max = popHash.length;
+
+cardElem.innerHTML = shuffle(xHash).join(" ");
+totBadge.class="badge"
+totBadge.innerHTML = "Total: " + xHash.length;
+
+function tHashCalc() {
+	totalHash = sum(saHashCount,comHashCount,popHashCount,xHash.length);
+	totBadge.innerHTML = "Total: " + totalHash;
+	if (totalHash > 29) {
+		totBadge.className = "badge deep-orange accent-2 white-text";
+	} else {
+		totBadge.className = "badge";
+	}
+}
+
+//Populate Sliders
+function saChng (x) {
+	if (x == saSlider) {
+		saNumDisp.value = x.value;
+	} else {
+		saSlider.value = x.value;
+	}
+	saHashCount = x.value;
+	tHashCalc();
+}
+
+function comChng (x) {
+	if (x == comSlider) {
+		comNumDisp.value = x.value;
+	} else {
+		comSlider.value = x.value;
+	}
+	comHashCount = x.value;
+	tHashCalc();
+}
+
+function popChng (x) {
+	if (x == popSlider) {
+		popNumDisp.value = x.value;
+	} else {
+		popSlider.value = x.value;
+	}
+	popHashCount = x.value;
+	tHashCalc();
+}
+
+function countAll(xTag) {
+	//xtag is either mention or hashtag
+	
+}
+
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function generateHash() {
+	
+	var x = shuffle(xHash);
+	var s = shuffle(saHash);
+	var c = shuffle(comHash);
+	var p = shuffle(popHash);
+	var h = 0;
+	var i = 0;
+	var t = shuffle(xHash.join(" "));
+	
+	var hCounts = [saHashCount, comHashCount, popHashCount];
+	var arrArr = [s,c,p];
+	t += ""
+	for (h = 0; h < hCounts.length; h++) {
+		if (hCounts[h].length != 0) {
+			for (i = 0; i < hCounts[h]; i++) {
+				t += arrArr[h][i] + " ";
+			}
+			t += "\n";
+		}
+	}
+	return(t);
+}
+
+function populateCard () {
+    var allText = getTags();
+    
+    allText += "\n";
+    
+    for (i = 0; i < 5; i++) {
+        allText += "• \n";
+    }
+    
+    allText += generateHash();
+	//cardElem.innerHTML = allText;
+    
+    $('#cardContent').val(allText);
+  M.textareaAutoResize($('#cardContent'));
+}
+
+function sum() {
+	s = 0;
+	var args = arguments;
+    for(var i=0; i<args.length; i++){
+        s += Number(args[i]);
+    }
+	return s;
+}
+</script>
+<!--
+-->
+
+<script>
+	//Collapse Functions
+	var collapse = document.getElementById("c");
+	
+	function deleteCollapse(d) {
+		var headr = d.parentNode.parentNode.parentNode;
+		headr.parentNode.removeChild(headr);	
+	}
+	
+	function createHeader(listItem, elemCount) {
+		
+		
+			var cHeader = document.createElement('div');
+			cHeader.className = "collapsible-header";
+			cHeader.id = "new_Header" + elemCount;
+			
+				var inputFld = document.createElement('div');
+				inputFld.className = "input-field";
+					
+					var editIcon = document.createElement('i');
+					editIcon.className = "material-icons prefix";
+					var eIcon = document.createTextNode("edit");
+					
+					var usrInput = document.createElement('input');
+					usrInput.id = "new_Input" + elemCount;
+					usrInput.type = "text";
+					usrInput.className = "validate";
+					
+					var lbl = document.createElement('label');
+					lbl.setAttribute("for", "new_Input" + elemCount);
+					var lTxt = document.createTextNode("Name");
+					
+					var delBtn = document.createElement('a');
+					delBtn.className = "waves-effect btn-small right waves-deep-orange darken-1";
+					delBtn.setAttribute("href", "#!");
+					delBtn.setAttribute("onClick", "deleteCollapse(this)");
+					var delTxt = document.createTextNode("DELETE");
+		
+		listItem.appendChild(cHeader);
+		cHeader.appendChild(inputFld);
+		inputFld.appendChild(editIcon);
+		editIcon.appendChild(eIcon);
+		inputFld.appendChild(usrInput);
+		inputFld.appendChild(lbl);
+		lbl.appendChild(lTxt);
+		inputFld.appendChild(delBtn);
+		delBtn.appendChild(delTxt);
+	}
+	
+	function createBody(listItem, elemCount) {
+		var cBod = document.createElement('div');
+		cBod.className = "collapsible-body";
+		cBod.id = "new_Body" + elemCount;
+		
+		var cBodInputField = document.createElement('div');
+		cBodInputField.className = "input-field";
+		
+		var bInput = document.createElement('input');
+		bInput.id = "show_input" + elemCount;
+		bInput.type = "text";
+		bInput.className = "validate";
+		
+		var bodyEditIcon = document.createElement('i');
+		bodyEditIcon.className = "material-icons prefix";
+		var bEIcon = document.createTextNode("edit");
+					
+		var bLbl = document.createElement('label');
+		bLbl.setAttribute("for", "show_input" + elemCount);
+		var bLblTxt = document.createTextNode("Description");
+		
+		var spn = document.createElement('span');
+		spn.className = "helper-text";
+		var hlplTxt = document.createTextNode("Short sentence describing the show");
+		
+		var chpContainr = document.createElement('div');
+		chpContainr.className = "container";
+		
+		var chpDivA = document.createElement('div');
+		chpDivA.className = "mention chips chips-initial";
+		chpDivA.id = "mention_id" + elemCount;
+		
+		var chpDivB = document.createElement('div');
+		chpDivB.className = "hashtag chips chips-initial";
+		chpDivB.id = "hashtag_id" + elemCount;
+		
+		listItem.appendChild(cBod);
+			cBod.appendChild(cBodInputField);
+				cBodInputField.appendChild(bodyEditIcon); 
+					bodyEditIcon.appendChild(bEIcon); 
+			
+				cBodInputField.appendChild(bInput);
+				cBodInputField.appendChild(bLbl);
+					bLbl.appendChild(bLblTxt);
+				cBodInputField.appendChild(spn);
+					spn.appendChild(hlplTxt);
+					
+				cBodInputField.appendChild(chpContainr);
+				chpContainr.appendChild(chpDivA);
+				chpContainr.appendChild(chpDivB);
+								
+				$(chpDivA).chips({
+					placeholder: ' + @mention',
+					secondaryPlaceholder: ' + @mention',
+				});
+				
+				$(chpDivB).chips({
+					placeholder: ' + #hashtag',
+					secondaryPlaceholder: ' + #hashtag',
+				});
+				
+	}
+	
+	function addCollapse () {
+		
+		var n = c.getElementsByTagName("li").length;
+		n++;
+		
+		var li = document.createElement('li');		
+		c.appendChild(li);
+		
+		createHeader(li, n);
+		createBody(li, n);
+		
+	}
+	
+	function toggleActive(elem) {
+		var l = elem.parentNode.parentNode.parentNode.parentNode;
+		
+		if (elem.checked == true) {
+			l.classList.remove('disabled');
+		} else {
+			l.classList.add('disabled');
+		}
+	}
+	
+</script>
+    
+<script>
+	//populate chips
+	$(document).ready(function(e) { 
+	/*
+		Key Party
+		COACH
+		Missed Opportunity
+		Kismet
+		Whine Time
+		Grumpy Old Men
+		Brongo
+	*/
+		$('#kpChips1').chips({
+		data: [{
+				tag: '@brennanananananan',
+			}, {
+				tag: '@slgrubbz',
+			}, {
+				tag: '@improvdan',
+			}, {
+				tag: '@teejaxling',
+			}, {
+				tag: '@ahreeahnah',
+			}, {
+				tag: '@franciscoj.benavides',
+			}, {
+				tag: '@lisamarleylittle',
+			}, {
+				tag: '@thedumbox',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#kpChips2').chips({
+		data: [{
+				tag: '#KeyParty',
+			}, {
+				tag: '#EveryThursday',
+			}, {
+				tag: '#Thursday',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#coachChips1').chips({
+		data: [{
+				tag: '@teejaxling',
+			}, {
+				tag: '@improvdan',
+			}, {
+				tag: '@brennanananananan',
+			}, {
+				tag: '@franciscoj.benavides',
+			}, {
+				tag: '@deuslexmachina',
+			}, {
+				tag: '@thedumbox',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#coachChips2').chips({
+		data: [{
+				tag: '#CoachImprov',
+			}, {
+				tag: '#ImprovCoaches',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#mopChips1').chips({
+		data: [{
+				tag: '@missedopportunitylol',
+			}, {
+				tag: '@teejaxling',
+			}, {
+				tag: '@ahreeahnah',
+			}, {
+				tag: '@slgrubbz',
+			}, {
+				tag: '@jleensaeger',
+			}, {
+				tag: '@mixymetz',
+			}, {
+				tag: '@snazzytush',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#mopChips2').chips({
+		data: [{
+				tag: '#MissedOpportunityLOL',
+			}, {
+				tag: '#WomenInComedy',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#kisChips1').chips({
+		data: [{
+				tag: '@kismetimprov',
+			}, {
+				tag: '@improvdan',
+			}, {
+				tag: '@teejaxling',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#kisChips2').chips({
+		data: [{
+				tag: '#KismetImprov',
+			}, {
+				tag: '#RelationshipBased',
+			}, {
+				tag: '#SlowComedy',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#wtChips1').chips({
+		data: [{
+				tag: '@lisamarleylittle',
+			}, {
+				tag: '@snazzytush',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#wtChips2').chips({
+		data: [{
+				tag: '#whinetime',
+			}, {
+				tag: '#girlsrule',
+			}, {
+				tag: '#whichonewassober',
+			}, {
+				tag: '#millennials',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#gomChips1').chips({
+		data: [{
+				tag: '@GrumpyOldMenImprov',
+			}, {
+				tag: '@vannjerk',
+			}, {
+				tag: '@scribnerbrian',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#gomChips2').chips({
+		data: [{ 
+				tag: '#GrumpyMania',
+			}, {
+				tag: '#FixedIncomeFisticuffs',
+			}, {
+				tag: '#AssistedLivingAssKicking',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+		
+		$('#bgoChips1').chips({
+		data: [{
+				tag: '@ponciosa',
+			}, {
+				tag: '@thedumbox',
+			}, {
+				tag: '@brennanananananan',
+			}],
+			secondaryPlaceholder: ' + @Mention',
+		});
+		
+		$('#bgoChips2').chips({
+		data: [{
+				tag: '#brongo',
+			}, {
+				tag: '#BrongoImprov',
+			}],
+			secondaryPlaceholder: ' + #Hashtag',
+		});
+	});
+	
+	function getTags () {
+		var lis = document.getElementById("c").getElementsByTagName("li");
+		var ch;
+		var showName = "";
+		var showDesc = "";
+		var text = "";
+		var i;
+		var ii;
+		var switchActive = false;
+		var cBody;
+		var cBodyInput;
+		var cBodyHeader;
+		
+		var allItems = [];
+		var mentionArr = [];
+		var hashtagArr = [];
+		
+		var mentionContainer;
+		var hashtagContainer;
+		var mVal;
+		var hVal;
+		var custLi;
+        
+		var rem = '<i class="material-icons close">close</i>';
+		
+		for (i = 0; i < lis.length; i++) { 
+			switchActive = lis[i].childNodes[1].getElementsByTagName("input")[0].checked;
+			
+			//Get Show name from header
+			showName = lis[i].childNodes[1].childNodes[3].innerHTML;
+				
+			if (switchActive == true) {
+				cBody = lis[i].childNodes[3];
+				cBodyInput = cBody.childNodes[1];
+				cBodyHeader = lis[i].childNodes[1];
+				
+				mentionContainer = cBodyInput.childNodes[9].childNodes[1].childNodes;
+				hashtagContainer = cBodyInput.childNodes[9].childNodes[3].childNodes;
+				
+				//Show description from text input
+				if (cBodyInput.getElementsByClassName("validate")[0].value == "") {
+					showDesc = cBodyInput.getElementsByClassName("validate")[0].placeholder;
+				} else {
+					showDesc = cBodyInput.getElementsByClassName("validate")[0].value;
+				}
+				text += showName + "\n" + showDesc;
+				
+				//Find mentions
+				for (ii = 0; ii < mentionContainer.length; ii++) {
+					mVal = mentionContainer[ii].innerHTML.replace(rem,"");
+					//text += mVal + "\n";
+					
+					if (allItems.includes(mVal) == false) {
+						allItems.push(mVal);
+						text += mVal + " ";
+					} else {
+						text += mVal.substring(1) + " ";
+					}
+				}
+				text += "\n";
+				//Find Hashtags
+				for (ii = 0; ii < hashtagContainer.length; ii++) {
+					hVal = hashtagContainer[ii].innerHTML.replace(rem,"")
+					//text += hVal + "\n";
+					
+					if (allItems.includes(hVal) == false) {
+						allItems.push(hVal);
+						text += hVal + " ";
+					} else {
+						text += hVal.substring(1) + " ";
+					}
+				}
+                text += "\n \n";
+			}
+                //text = lis.length;
+            
+			
+			//Custom Teams and Descriptions
+			//if (lis[i].childNodes[0].id == undefined) {
+				//text = lis[i].childNodes[0].className;//.childNodes[0].length;
+			//}
+            
+			//text += "\n \n";
+		}
+		//return(text);
+        return(text);
+	}
+	
+</script>   
+
+<script>
+    
+function copyText() {
+    //alert(document.getElementById("cardContent").value);
+  document.getElementById("cardContent").select();
+  document.execCommand("Copy");
+}
+
+</script>
+
+<script>
+	M.AutoInit();
+</script>
+</body>
+
+
+</html>
